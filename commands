@@ -1,1 +1,5 @@
 mongod --dbpath /path/mongodb/
+
+db.collection_name.find().pretty()   - nice collcetion display
+
+db.new_collection.insert( { a : 1 } )   - create new collection
