@@ -4,8 +4,8 @@ db.collection_name.find().pretty()   - nice collcetion display
 
 db.new_collection.insert( { a : 1 } )   - create new collection
 
-mongod --port 30001 --dbpath /data/primary mongod-pri --replSet CorruptionTest --smallfiles --oplogSize 128 --nojournal
+mongod --port 30001 --dbpath /data/primary --replSet CorruptionTest --smallfiles --oplogSize 128 --nojournal
 
-mongod --port 30002 --dbpath /data/second mongod-sec --replSet CorruptionTest --smallfiles --oplogSize 128 --nojournal
+mongod --port 30002 --dbpath /data/second --replSet CorruptionTest --smallfiles --oplogSize 128 --nojournal
 
-mongod --port 30003 --dbpath /data/arbiter mongod-arb --replSet CorruptionTest --nojournal
+mongod --port 30003 --dbpath /data/arbiter --replSet CorruptionTest --nojournal
