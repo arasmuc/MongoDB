@@ -4,8 +4,84 @@ db.collection_name.find().pretty()   - nice collcetion display
 
 db.new_collection.insert( { a : 1 } )   - create new collection
 
-mongod --port 30001 --dbpath /data/primary --replSet CorruptionTest --smallfiles --oplogSize 128 --nojournal
+wget https://university.mongodb.com/static/10gen_2014_M202_July/handouts/chapter_3_disaster_recovery_and_backup.d7f194a0c43b.zip
+unzip chapter_3_disaster_recovery_and_backup.d7f194a0c43b.zip
+mv 3_1_broken_node_corrupt_data_files 3_1
+cd 3_1
+tar -xvf mongod-arb.tar.gz
+tar -xvf mongod-pri.tar.gz
+tar -xvf mongod-sec.tar.gz
+rm -rf *.tar.gz
 
-mongod --port 30002 --dbpath /data/second --replSet CorruptionTest --smallfiles --oplogSize 128 --nojournal
+mongod --port 30001 --dbpath mongod-pri --replSet CorruptionTest --smallfiles --oplogSize 128 --config mongod-pri.conf
+mongod --port 30002 --dbpath mongod-sec --replSet CorruptionTest --smallfiles --oplogSize 128 --config mongod-sec.conf
+mongod --port 30003 --dbpath mongod-arb --replSet CorruptionTest --config mongod-arb.conf
 
-mongod --port 30003 --dbpath /data/arbiter --replSet CorruptionTest --nojournal
+mongo --port 30002
+
+rs.stepDown()
+
+rs.status()
+{
+    "set" : "CorruptionTest",
+    "date" : ISODate("2014-08-05T10:39:07Z"),
+    "myState" : 2,
+    "syncingTo" : "127.0.0.1:30001",
+    "members" : [
+        {
+            "_id" : 0,
+            "name" : "127.0.0.1:30001",
+            "health" : 1,
+            "state" : 1,
+            "stateStr" : "PRIMARY",
+            "uptime" : 119,
+            "optime" : Timestamp(1399499925, 7077),
+            "optimeDate" : ISODate("2014-05-07T21:58:45Z"),
+            "lastHeartbeat" : ISODate("2014-08-05T10:39:06Z"),
+            "lastHeartbeatRecv" : ISODate("2014-08-05T10:39:05Z"),
+            "pingMs" : 0,
+            "electionTime" : Timestamp(1407235135, 1),
+            "electionDate" : ISODate("2014-08-05T10:38:55Z")
+        },
+        {
+            "_id" : 1,
+            "name" : "127.0.0.1:30002",
+            "health" : 1,
+            "state" : 2,
+            "stateStr" : "SECONDARY",
+            "uptime" : 124,
+            "optime" : Timestamp(1399499925, 7077),
+            "optimeDate" : ISODate("2014-05-07T21:58:45Z"),
+            "infoMessage" : "syncing to: 127.0.0.1:30001",
+            "self" : true
+        },
+        {
+            "_id" : 2,
+            "name" : "127.0.0.1:30003",
+            "health" : 1,
+            "state" : 7,
+            "stateStr" : "ARBITER",
+            "uptime" : 115,
+            "lastHeartbeat" : ISODate("2014-08-05T10:39:07Z"),
+            "lastHeartbeatRecv" : ISODate("2014-08-05T10:39:06Z"),
+            "pingMs" : 0
+        }
+    ],
+    "ok" : 1
+}
+
+exit
+
+mongo --port 30002
+use admin
+db.shutdownServer()
+exit
+cd mongod-sec/
+rm -rf journal local.*
+rm -rf testDB.*
+rm -rf mongod*
+cd ..
+mongod --port 30002 --dbpath mongod-sec --replSet CorruptionTest --smallfiles --oplogSize 128 --config mongod-sec.conf
+
+mongo --port 30001
+rs.status()
