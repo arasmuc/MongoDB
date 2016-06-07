@@ -1,0 +1,4 @@
+rs.initiate()
+rs.conf()
+
+rs.add("mongo1.example.com")
