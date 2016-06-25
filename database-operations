@@ -1,12 +1,12 @@
 https://docs.mongodb.com/manual/reference/command/#database-operations
 
-# Create your superuser
+# Create  superuser
 $ mongo
 > use admin
 > db.createUser({user:"adminuser",pwd:"secretpasswd", roles:[{role:"root",db:"admin"}]})
 > exit
 
-# Add user to your DB
+# Add user to  DB
 $ mongo
 > use your_db
 > db.createUser(
