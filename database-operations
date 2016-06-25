@@ -1,5 +1,20 @@
 https://docs.mongodb.com/manual/reference/command/#database-operations
 
+# user info
+db.runCommand(
+               {
+                 usersInfo:  { user: "Kari", db: "home" },
+                 showPrivileges: true
+               }
+)
+
+
+db.runCommand( { usersInfo: [ { user: "Kari", db: "home" }, { user: "Li", db: "myApp" } ],
+                 showPrivileges: true
+             } )
+             
+             
+
 # Create  superuser
 $ mongo
 > use admin
