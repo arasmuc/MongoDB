@@ -1,0 +1,9 @@
+https://docs.mongodb.com/manual/core/master-slave/
+
+mongod --master --dbpath /data/masterdb/
+mongod --slave --source <masterhostname><:<port>> --dbpath /data/slavedb/
+
+Diagnostics:
+rs.printReplicationInfo()
+rs.printSlaveReplicationInfo()
+db.serverStatus( { repl: 1 } )
