@@ -1,0 +1,20 @@
+https://docs.mongodb.com/manual/administration/monitoring/
+
+mongostat
+mongotop
+
+serverStatus command, 
+or
+db.serverStatus()
+
+dbStats command,
+or
+db.stats()
+
+collStats 
+or
+db.collection.stats()
+
+replSetGetStatus command
+rs.status() 
+
