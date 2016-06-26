@@ -1,0 +1,44 @@
+db.test.help() 
+DBCollection help
+	db.test.find().help() - show DBCursor help
+	db.test.count()
+	db.test.copyTo(newColl) - duplicates collection by copying all documents to newColl; no indexes are copied.
+	db.test.convertToCapped(maxBytes) - calls {convertToCapped:'test', size:maxBytes}} command
+	db.test.dataSize()
+	db.test.distinct( key ) - e.g. db.test.distinct( 'x' )
+	db.test.drop() drop the collection
+	db.test.dropIndex(index) - e.g. db.test.dropIndex( "indexName" ) or db.test.dropIndex( { "indexKey" : 1 } )
+	db.test.dropIndexes()
+	db.test.ensureIndex(keypattern[,options]) - options is an object with these possible fields: name, unique, dropDups
+	db.test.reIndex()
+	db.test.find([query],[fields]) - query is an optional query filter. fields is optional set of fields to return.
+	                                              e.g. db.test.find( {x:77} , {name:1, x:1} )
+	db.test.find(...).count()
+	db.test.find(...).limit(n)
+	db.test.find(...).skip(n)
+	db.test.find(...).sort(...)
+	db.test.findOne([query])
+	db.test.findAndModify( { update : ... , remove : bool [, query: {}, sort: {}, 'new': false] } )
+	db.test.getDB() get DB object associated with collection
+	db.test.getPlanCache() get query plan cache associated with collection
+	db.test.getIndexes()
+	db.test.group( { key : ..., initial: ..., reduce : ...[, cond: ...] } )
+	db.test.insert(obj)
+	db.test.mapReduce( mapFunction , reduceFunction , <optional params> )
+	db.test.aggregate( [pipeline], <optional params> ) - performs an aggregation on a collection; returns a cursor
+	db.test.remove(query)
+	db.test.renameCollection( newName , <dropTarget> ) renames the collection.
+	db.test.runCommand( name , <options> ) runs a db command with the given name where the first param is the collection name
+	db.test.save(obj)
+	db.test.stats()
+	db.test.storageSize() - includes free space allocated to this collection
+	db.test.totalIndexSize() - size in bytes of all the indexes
+	db.test.totalSize() - storage allocated for all data and indexes
+	db.test.update(query, object[, upsert_bool, multi_bool]) - instead of two flags, you can pass an object with fields: upsert, multi
+	db.test.validate( <full> ) - SLOW
+	db.test.getShardVersion() - only for use with sharding
+	db.test.getShardDistribution() - prints statistics about data distribution in the cluster
+	db.test.getSplitKeysForChunks( <maxChunkSize> ) - calculates split points over all chunks and returns splitter function
+	db.test.getWriteConcern() - returns the write concern used for any operations on this collection, inherited from server/db if set
+	db.test.setWriteConcern( <write concern doc> ) - sets the write concern for writes to the collection
+	db.test.unsetWriteConcern( <write concern doc> ) - unsets the write concern for writes to the collection
