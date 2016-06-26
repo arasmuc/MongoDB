@@ -1,0 +1,4 @@
+
+    show collections
+    show tables
+    db.getCollectionNames()
