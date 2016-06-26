@@ -15,6 +15,23 @@ sh.addShardTag(shard,tag)                 adds the tag to the shard
 sh.removeShardTag(shard,tag)              removes the tag from the shard
 sh.addTagRange(fullName,min,max,tag)      tags the specified range of the given collection
 sh.status()                               prints a general overview of the cluster
+
+
+The config database supports sharded cluster operation 
+https://docs.mongodb.com/manual/reference/config-database/#config-database
+Config Database
+use config
+show collections
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
 
 
