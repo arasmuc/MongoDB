@@ -1,0 +1,11 @@
+db.adminCommand( { listDatabases: 1 } )
+
+db.hostInfo()
+db.adminCommand( { "hostInfo" : 1 } )
+
+db.adminCommand({getLog: "*" })
+
+db.adminCommand("top")
+use admin
+db.runCommand( { top: 1 } )
+
