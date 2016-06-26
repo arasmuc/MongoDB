@@ -1,0 +1,24 @@
+> db.stats() 
+{
+	"db" : "local",
+	"collections" : 3,
+	"objects" : 8,
+	"avgObjSize" : 588,
+	"dataSize" : 4704,
+	"storageSize" : 10502144,
+	"numExtents" : 3,
+	"indexes" : 1,
+	"indexSize" : 8176,
+	"fileSize" : 67108864,
+	"nsSizeMB" : 16,
+	"dataFileVersion" : {
+		"major" : 4,
+		"minor" : 5
+	},
+	"extentFreeList" : {
+		"num" : 0,
+		"totalSize" : 0
+	},
+	"ok" : 1
+}
+
