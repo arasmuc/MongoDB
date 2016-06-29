@@ -2,6 +2,27 @@ ENABLE SHARDING:
 https://docs.mongodb.com/manual/tutorial/deploy-shard-cluster/
 http://www.mongodbspain.com/en/2015/03/03/two-steps-to-shard-a-mongodb-collection/
 
+mongos> sh.enableSharding("shardTestDB")
+{ "ok" : 1 }
+mongos> sh.status()
+--- Sharding Status ---
+  sharding version: {
+    	"_id" : 1,
+    	"version" : 4,
+        "minCompatibleVersion" : 4,
+    	"currentVersion" : 5,
+    	"clusterId" : ObjectId("54eb010dc6d2e5d19ca9df05")
+}
+  shards:
+    	{  "_id" : "shard0000",  "host" : "PSINFW95:27000" }
+    	{  "_id" : "shard0001",  "host" : "PSINFW95:27001" }
+  databases:
+    	{  "_id" : "admin",  "partitioned" : false,  "primary" : "config" }
+    	{  "_id" : "test",  "partitioned" : false,  "primary" : "shard0000" }
+    	{  "_id" : "shardTestDB",  "partitioned" : true,  "primary" : "shard0000" }
+ 
+mongos>
+
 http://blog.bugsnag.com/mongo-sharding
 
 https://www.digitalocean.com/community/tutorials/how-to-create-a-sharded-cluster-in-mongodb-using-an-ubuntu-12-04-vps
