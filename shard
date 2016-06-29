@@ -23,6 +23,33 @@ mongos> sh.status()
  
 mongos>
 
+mongos> sh.shardCollection("shardTestDB.users", { "username" : 1 } )
+{ "collectionsharded" : "shardTestDB.users", "ok" : 1 }
+mongos> sh.status()
+--- Sharding Status ---
+  sharding version: {
+    	"_id" : 1,
+    	"version" : 4,
+        "minCompatibleVersion" : 4,
+    	"currentVersion" : 5,
+    	"clusterId" : ObjectId("54eb010dc6d2e5d19ca9df05")
+}
+  shards:
+    	{  "_id" : "shard0000",  "host" : "PSINFW95:27000" }
+    	{  "_id" : "shard0001",  "host" : "PSINFW95:27001" }
+  databases:
+    	{  "_id" : "admin",  "partitioned" : false,  "primary" : "config" }
+    	{  "_id" : "test",  "partitioned" : false,  "primary" : "shard0000" }
+    	{  "_id" : "shardTestDB",  "partitioned" : true,  "primary" : "shard0000" }
+            	shardTestDB.users
+	                    shard key: { "username" : 1 }
+                    	chunks:
+                                shard0000   	1
+                    	{ "username" : { "$minKey" : 1 } } -->> { "username" : { "$maxKey" : 1 } } on : shard0000 Timestamp(1, 0)
+ 
+mongos>
+
+
 http://blog.bugsnag.com/mongo-sharding
 
 https://www.digitalocean.com/community/tutorials/how-to-create-a-sharded-cluster-in-mongodb-using-an-ubuntu-12-04-vps
