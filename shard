@@ -1,5 +1,6 @@
 ENABLE SHARDING:
 https://docs.mongodb.com/manual/tutorial/deploy-shard-cluster/
+http://www.mongodbspain.com/en/2015/03/03/two-steps-to-shard-a-mongodb-collection/
 
 http://blog.bugsnag.com/mongo-sharding
 
